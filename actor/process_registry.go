@@ -32,8 +32,18 @@ func newSliceMap() *SliceMap {
 }
 
 func (s *SliceMap) GetBucket(key string) cmap.ConcurrentMap {
+	//hash := murmur32.Sum32([]byte(key))
+	//index := int(hash) % len(s.LocalPIDs)
+	//
+	//return s.LocalPIDs[index]
 	hash := murmur32.Sum32([]byte(key))
-	index := int(hash) % len(s.LocalPIDs)
+	var index int
+	intSize := 32 << (^uint(0) >> 63)
+	if intSize > 32 {
+		index = int(hash) % len(s.LocalPIDs)
+	} else {
+		index = (int(hash) & 0x7FFFFFFF) % len(s.LocalPIDs)
+	}
 
 	return s.LocalPIDs[index]
 }

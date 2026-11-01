@@ -27,11 +27,14 @@ func (p *protoSerializer) Serialize(msg interface{}) ([]byte, error) {
 }
 
 func (p *protoSerializer) Deserialize(typeName string, bytes []byte) (interface{}, error) {
-	n, _ := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(typeName))
+	n, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(typeName))
+	if err != nil {
+		return nil, err
+	}
 
 	pm := n.New().Interface()
 
-	err := proto.Unmarshal(bytes, pm)
+	err = proto.Unmarshal(bytes, pm)
 	return pm, err
 }
 
