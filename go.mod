@@ -1,7 +1,7 @@
 module github.com/asynkron/protoactor-go
 
 // because etcd/v3 need go 1.16 version
-go 1.18
+go 1.26
 
 require (
 	github.com/Workiva/go-datastructures v1.0.53
@@ -29,7 +29,7 @@ require (
 	github.com/golang/mock v1.5.0
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/lithammer/shortuuid/v4 v4.0.0
-	github.com/twmb/murmur3 v1.1.6
+	github.com/twmb/murmur3 v1.2.1
 	go.etcd.io/etcd/client/v3 v3.5.7
 	golang.org/x/exp v0.0.0-20220518171630-0b5c67f07fdf
 	golang.org/x/sync v0.2.0
